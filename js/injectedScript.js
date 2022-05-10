@@ -29,8 +29,9 @@ function addStyle(styles) {
   document.getElementsByTagName("head")[0].appendChild(css);
 }
 
-const savedConfig = JSON.parse(loadStuff() || null);
-const { biggerSearchResults, tilesForBigScreen, prettyPrintExportProjectButton, responsiveScriptView, prettyPrintExportSoundButton } = savedConfig || defaultConfig;
+const savedConfig = JSON.parse(loadStuff() || {});
+const updatedConfig = {...defaultConfig, ...savedConfig}
+const { biggerSearchResults, tilesForBigScreen, prettyPrintExportProjectButton, responsiveScriptView, prettyPrintExportSoundButton } = updatedConfig;
 
 if (biggerSearchResults) {
   let styles = '#search-wrap #results-list { width: 600px;}';
@@ -47,6 +48,7 @@ if( responsiveScriptView ) {
 }
 
 if (tilesForBigScreen) {
+
   let styles = '#tiles-container { padding: 8px 32px; }';
   styles += '#tiles-container .export-import { position: relative; }';
   styles += '#tiles-container .layer-info { width: 100%; }';
