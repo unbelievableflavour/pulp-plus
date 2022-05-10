@@ -47,20 +47,56 @@ function relocateNode(node, target) {
 
 const savedConfig = JSON.parse(loadStuff() || {});
 const updatedConfig = {...defaultConfig, ...savedConfig}
-const { biggerSearchResults, tilesForBigScreen, prettyPrintExportProjectButton, responsiveScriptView, prettyPrintExportSoundButton, openScriptButton } = updatedConfig;
+const {
+  biggerSearchResults,
+  tilesForBigScreen,
+  prettyPrintExportProjectButton,
+  responsiveScriptView,
+  prettyPrintExportSoundButton,
+  openScriptButton,
+  customThemeEnabled,
+  theme,
+  removeFooter
+} = updatedConfig;
 
-if (biggerSearchResults) {
+if ( biggerSearchResults ) {
   let styles = '#search-wrap #results-list { width: 600px;}';
   styles += '#search-wrap #results-list li:not(.label), #select-options { max-width: 100%; }';
 
   addStyle(styles);
 }
 
-if( responsiveScriptView ) {
+if ( responsiveScriptView ) {
   let styles = '#mode-script { width: 100%; }';
   styles += '#game-pane, #script-pane { width: 100%; }';
 
   addStyle(styles);
+}
+
+if ( customThemeEnabled ) {
+  var themeStylesheet = one('#theme-stylesheet');
+  themeStylesheet.href = ""
+
+  addStyle(` 
+    .theme {
+    /* default */
+    --ui-color-primary: ${theme.colorPrimary}; /* text */
+    --ui-color-secondary: ${theme.colorSecondary}; /* background */
+    --ui-color-tertiary: ${theme.colorTertiary}; /* text on frame */
+    --ui-color-key: ${theme.colorKey}; /* active */
+    --ui-color-call: ${theme.colorCall}; /* interactive */
+    --ui-color-void: ${theme.colorVoid}; /* frame */
+  
+    --ui-color-primary-alpha-10: rgba(50,47,39,0.1);
+    --ui-color-primary-alpha-20: rgba(50,47,39,0.2);
+    --ui-color-primary-alpha-50: rgba(50,47,39,0.5);
+    --ui-color-secondary-alpha-50: rgba(177,174,168,0.5);
+    --ui-color-key-alpha-50: #d8b370; /* 50% key on #b1aea8 (specifically, not --ui-color-secondary), pre-baked */
+    --ui-color-call-alpha-50: var(--ui-color-secondary-alpha-50);
+  }`);
+
+  const themeSelect = document.getElementById('theme-select');
+  themeSelect.innerText = "Custom"
 }
 
 if (tilesForBigScreen) {
@@ -133,6 +169,10 @@ if (prettyPrintExportSoundButton) {
 
   exportButtons.append(container);
 }
+if (removeFooter) {
+  const customFooter = document.getElementById('custom-footer');
+  customFooter.remove();
+}
 
 if (openScriptButton) {
 
@@ -145,7 +185,7 @@ if (openScriptButton) {
     const modeId = EditorMode.Script
     data.editor.activeModeId = modeId;
     document.body.dataset.editorMode = modeId;
-    
+
     each('#modes li.active', function(i,node) {
       node.classList.remove('active');
     });
