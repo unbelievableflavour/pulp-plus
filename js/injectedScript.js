@@ -9,9 +9,10 @@ function loadStuff() {
 
 const defaultConfig = {
   biggerSearchResults: true,
-  prettyPrintExportButton: true,
+  prettyPrintExportProjectButton: true,
   tilesForBigScreen: true,
-  responsiveScriptView: true
+  responsiveScriptView: true,
+  prettyPrintExportSoundButton: true
 }
 
 function addStyle(styles) {
@@ -29,7 +30,7 @@ function addStyle(styles) {
 }
 
 const savedConfig = JSON.parse(loadStuff() || null);
-const { biggerSearchResults, tilesForBigScreen, prettyPrintExportButton, responsiveScriptView, openScriptButton } = savedConfig || defaultConfig;
+const { biggerSearchResults, tilesForBigScreen, prettyPrintExportProjectButton, responsiveScriptView, prettyPrintExportSoundButton } = savedConfig || defaultConfig;
 
 if (biggerSearchResults) {
   let styles = '#search-wrap #results-list { width: 600px;}';
@@ -65,7 +66,7 @@ if (tilesForBigScreen) {
   document.getElementById("layers").style.width = '100%';
 }
 
-if (prettyPrintExportButton) {
+if (prettyPrintExportProjectButton) {
 
   function prettyExportJSON() {
     var json = JSON.stringify(data, null, 2);
@@ -81,6 +82,31 @@ if (prettyPrintExportButton) {
   const button = document.createElement('button');
   button.type = "button";
   button.onclick = prettyExportJSON;
+  button.appendChild(document.createTextNode("Pretty Export"));
+
+  const container = document.createElement('div');
+  container.className = "wrap"
+  container.append(button);
+
+  exportButtons.append(container);
+}
+
+if (prettyPrintExportSoundButton) {
+
+  function prettyExportAudioJSON() {
+    var json = JSON.stringify(data.sounds, null, 2);
+    var a = document.createElement('a');
+    var blob = new Blob([json], {'type':'application/octet-stream'});
+    a.href = window.URL.createObjectURL(blob);
+    a.download = 'pulp-sounds.json';
+    a.click();
+  }
+
+  const exportButtons = document.getElementById('sounds-modifier');
+
+  const button = document.createElement('button');
+  button.type = "button";
+  button.onclick = prettyExportAudioJSON;
   button.appendChild(document.createTextNode("Pretty Export"));
 
   const container = document.createElement('div');
