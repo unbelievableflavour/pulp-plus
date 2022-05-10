@@ -5,19 +5,15 @@
   "description": "This extension will extend Pulp with some extra features",
   "version": "0.0.1",
 
-  "action": {
-    "default_popup": "popup.html"
-  },
   "content_scripts": [{
     "matches": ["https://play.date/pulp/*"],
-    "js": ["content.js"]
+    "js": ["/js/scriptInjector.js"]
   }],
   "web_accessible_resources" : [{
-    "resources": ["/js/my_file.js"],
+    "resources": ["/js/injectedScript.js"],
     "matches": ["<all_urls>"]
   }],
   "permissions": [
-    "activeTab",
     "storage"
   ]
 }

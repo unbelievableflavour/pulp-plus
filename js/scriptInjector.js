@@ -6,5 +6,5 @@
     s.setAttribute('src', file);
     th.appendChild(s);
   }
-  injectScript( chrome.runtime.getURL('/js/my_file.js'), 'body');
+  injectScript( chrome.runtime.getURL('/js/injectedScript.js'), 'body');
 }
