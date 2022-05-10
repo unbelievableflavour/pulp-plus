@@ -13,7 +13,17 @@ const defaultConfig = {
   tilesForBigScreen: true,
   responsiveScriptView: true,
   prettyPrintExportSoundButton: true,
-  openScriptButton: true
+  openScriptButton: true,
+  customThemeEnabled: true,
+  removeFooter: true,
+  theme: {
+    colorPrimary: 'var(--ui-color-playdate-black)',
+    colorSecondary: 'var(--ui-color-playdate-white)',
+    colorTertiary: 'var(--ui-color-secondary)',
+    colorKey: 'var(--ui-color-playdate-yellow)',
+    colorCall: 'var(--ui-color-secondary)',
+    colorVoid: 'black',
+  },
 }
 
 function addStyle(styles) {
@@ -193,16 +203,22 @@ function addSettingsContainer() {
   const saveSettingsButton = document.createElement('button');
   saveSettingsButton.type = "button";
   saveSettingsButton.onclick = saveSettings;
-  saveSettingsButton.innerText = "Save settings";
+  saveSettingsButton.innerText = "Save";
 
   const resetSettingsButton = document.createElement('button');
   resetSettingsButton.type = "button";
   resetSettingsButton.onclick = resetSettings;
-  resetSettingsButton.innerText = "Reset settings";
+  resetSettingsButton.innerText = "Reset";
+
+  const closeSettingsButton = document.createElement('button');
+  closeSettingsButton.type = "button";
+  closeSettingsButton.onclick = toggleSettingsContainer;
+  closeSettingsButton.innerText = "Close";
 
   settingsContainer.appendChild(settingstextArea)
   settingsContainer.appendChild(saveSettingsButton)
   settingsContainer.appendChild(resetSettingsButton)
+  settingsContainer.appendChild(closeSettingsButton)
 
   document.getElementById('main').appendChild(settingsContainer);
 
@@ -221,7 +237,7 @@ addSettingsContainer();
 const saveSettingsButton = document.createElement('button');
 saveSettingsButton.type = "button";
 saveSettingsButton.onclick = toggleSettingsContainer;
-saveSettingsButton.appendChild(document.createTextNode("Pulp+ Settings"));
+saveSettingsButton.innerText = "Pulp+ Settings";
 
 const settingsButtonContainer = document.createElement('div');
 settingsButtonContainer.className = "wrap"
