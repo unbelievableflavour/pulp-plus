@@ -12,7 +12,8 @@ const defaultConfig = {
   prettyPrintExportProjectButton: true,
   tilesForBigScreen: true,
   responsiveScriptView: true,
-  prettyPrintExportSoundButton: true
+  prettyPrintExportSoundButton: true,
+  openScriptButton: true
 }
 
 function addStyle(styles) {
@@ -29,9 +30,14 @@ function addStyle(styles) {
   document.getElementsByTagName("head")[0].appendChild(css);
 }
 
+function relocateNode(node, target) {
+  node.parentNode.removeChild(node);
+  target.appendChild(node);
+}
+
 const savedConfig = JSON.parse(loadStuff() || {});
 const updatedConfig = {...defaultConfig, ...savedConfig}
-const { biggerSearchResults, tilesForBigScreen, prettyPrintExportProjectButton, responsiveScriptView, prettyPrintExportSoundButton } = updatedConfig;
+const { biggerSearchResults, tilesForBigScreen, prettyPrintExportProjectButton, responsiveScriptView, prettyPrintExportSoundButton, openScriptButton } = updatedConfig;
 
 if (biggerSearchResults) {
   let styles = '#search-wrap #results-list { width: 600px;}';
@@ -116,6 +122,41 @@ if (prettyPrintExportSoundButton) {
   container.append(button);
 
   exportButtons.append(container);
+}
+
+if (openScriptButton) {
+
+  let styles = '#mode-script #go-to-script { display: none; }';
+  styles += '#mode-room #script-events { position: absolute; right: 9999px}';
+
+  addStyle(styles);
+
+  function openScript() {
+    const modeId = EditorMode.Script
+    data.editor.activeModeId = modeId;
+    document.body.dataset.editorMode = modeId;
+    
+    each('#modes li.active', function(i,node) {
+      node.classList.remove('active');
+    });
+    each('#modes li:nth-child('+(modeId+1)+')', function(i,node) {
+      node.classList.add('active');
+    });
+
+    var sharedEditor = one('#shared-editor');
+
+    relocateNode(sharedEditor, one('#script-script-editor'));
+  }
+
+  const scriptModifiers = document.getElementById('script-modifiers');
+
+  const button = document.createElement('button');
+  button.type = "button";
+  button.id = "go-to-script";
+  button.onclick = openScript;
+  button.innerText = "Open script";
+
+  scriptModifiers.append(button);
 }
 
 function addSettingsContainer() {
