@@ -82,7 +82,7 @@ if (prettyPrintExportProjectButton) {
   const button = document.createElement('button');
   button.type = "button";
   button.onclick = prettyExportJSON;
-  button.appendChild(document.createTextNode("Pretty Export"));
+  button.innerText = "Pretty Export";
 
   const container = document.createElement('div');
   container.className = "wrap"
@@ -107,7 +107,7 @@ if (prettyPrintExportSoundButton) {
   const button = document.createElement('button');
   button.type = "button";
   button.onclick = prettyExportAudioJSON;
-  button.appendChild(document.createTextNode("Pretty Export"));
+  button.innerText = "Pretty Export";
 
   const container = document.createElement('div');
   container.className = "wrap"
@@ -122,7 +122,16 @@ function addSettingsContainer() {
       var configInput = document.getElementById('config').value;
       var jsonConfig = JSON.parse(configInput);
       saveStuff(jsonConfig);
-      alert("Saved! Don't forget to refresh the page.");
+      alert("Settings have been saved! Don't forget to refresh the page.");
+    } catch {
+      alert("An error occured! check your json");
+    }
+  }
+
+  function resetSettings() {
+    try {
+      saveStuff(defaultConfig);
+      alert("Settings have been reset! Don't forget to refresh the page.");
     } catch {
       alert("An error occured! check your json");
     }
@@ -141,10 +150,16 @@ function addSettingsContainer() {
   const saveSettingsButton = document.createElement('button');
   saveSettingsButton.type = "button";
   saveSettingsButton.onclick = saveSettings;
-  saveSettingsButton.appendChild(document.createTextNode("Save settings"));
+  saveSettingsButton.innerText = "Save settings";
+
+  const resetSettingsButton = document.createElement('button');
+  resetSettingsButton.type = "button";
+  resetSettingsButton.onclick = resetSettings;
+  resetSettingsButton.innerText = "Reset settings";
 
   settingsContainer.appendChild(settingstextArea)
   settingsContainer.appendChild(saveSettingsButton)
+  settingsContainer.appendChild(resetSettingsButton)
 
   document.getElementById('main').appendChild(settingsContainer);
 
