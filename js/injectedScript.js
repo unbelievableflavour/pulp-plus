@@ -8,21 +8,30 @@ function loadStuff() {
 }
 
 const defaultConfig = {
-  biggerSearchResults: true,
-  prettyPrintExportProjectButton: true,
-  tilesForBigScreen: true,
-  responsiveScriptView: true,
-  prettyPrintExportSoundButton: true,
-  openScriptButton: true,
-  customThemeEnabled: true,
-  removeFooter: true,
-  theme: {
-    colorPrimary: 'var(--ui-color-playdate-black)',
-    colorSecondary: 'var(--ui-color-playdate-white)',
-    colorTertiary: 'var(--ui-color-secondary)',
-    colorKey: 'var(--ui-color-playdate-yellow)',
-    colorCall: 'var(--ui-color-secondary)',
-    colorVoid: 'black',
+  biggerSearchResults: { enabled: true },
+  prettyPrintExportButtons: {
+    enabled: true,
+    project:true,
+    sound: true
+  },
+  responsiveScriptView: { enabled: true },
+  openScriptButton: { enabled: true },
+  customTheme: {
+    enabled: true,
+    theme: {
+      colorPrimary: 'var(--ui-color-playdate-black)',
+      colorSecondary: 'var(--ui-color-playdate-white)',
+      colorTertiary: 'var(--ui-color-secondary)',
+      colorKey: 'var(--ui-color-playdate-yellow)',
+      colorCall: 'var(--ui-color-secondary)',
+      colorVoid: 'black',
+    },
+  },
+  removeFooter: { enabled: true },
+  tilesForBigScreen: {
+    enabled: true,
+    scrollbar: true,
+    responsive: false,
   },
 }
 
@@ -50,42 +59,51 @@ const updatedConfig = {...defaultConfig, ...savedConfig}
 const {
   biggerSearchResults,
   tilesForBigScreen,
-  prettyPrintExportProjectButton,
   responsiveScriptView,
-  prettyPrintExportSoundButton,
+  prettyPrintExportButtons,
   openScriptButton,
-  customThemeEnabled,
-  theme,
-  removeFooter
+  customTheme,
+  removeFooter,
 } = updatedConfig;
 
-if ( biggerSearchResults ) {
-  let styles = '#search-wrap #results-list { width: 600px;}';
-  styles += '#search-wrap #results-list li:not(.label), #select-options { max-width: 100%; }';
+if ( biggerSearchResults.enabled ) {
+  const styles = `
+    #search-wrap #results-list { 
+      width: 600px;
+    }
+    #search-wrap #results-list li:not(.label), #select-options { 
+      max-width: 100%; 
+    }
+  `;
 
   addStyle(styles);
 }
 
-if ( responsiveScriptView ) {
-  let styles = '#mode-script { width: 100%; }';
-  styles += '#game-pane, #script-pane { width: 100%; }';
+if ( responsiveScriptView.enabled ) {
+  const styles = `
+    #mode-script { 
+      width: 100%; 
+    }
+    #game-pane, #script-pane { 
+      width: 100%; 
+    }
+  `;
 
   addStyle(styles);
 }
 
-if ( customThemeEnabled ) {
-  var themeStylesheet = one('#theme-stylesheet');
-  themeStylesheet.href = ""
+if ( customTheme.enabled ) {
+  one('#theme-stylesheet').href = ""
 
   addStyle(` 
     .theme {
     /* default */
-    --ui-color-primary: ${theme.colorPrimary}; /* text */
-    --ui-color-secondary: ${theme.colorSecondary}; /* background */
-    --ui-color-tertiary: ${theme.colorTertiary}; /* text on frame */
-    --ui-color-key: ${theme.colorKey}; /* active */
-    --ui-color-call: ${theme.colorCall}; /* interactive */
-    --ui-color-void: ${theme.colorVoid}; /* frame */
+    --ui-color-primary: ${customTheme.theme.colorPrimary}; /* text */
+    --ui-color-secondary: ${customTheme.theme.colorSecondary}; /* background */
+    --ui-color-tertiary: ${customTheme.theme.colorTertiary}; /* text on frame */
+    --ui-color-key: ${customTheme.theme.colorKey}; /* active */
+    --ui-color-call: ${customTheme.theme.colorCall}; /* interactive */
+    --ui-color-void: ${customTheme.theme.colorVoid}; /* frame */
   
     --ui-color-primary-alpha-10: rgba(50,47,39,0.1);
     --ui-color-primary-alpha-20: rgba(50,47,39,0.2);
@@ -99,14 +117,17 @@ if ( customThemeEnabled ) {
   themeSelect.innerText = "Custom"
 }
 
-if (tilesForBigScreen) {
+if ( tilesForBigScreen.enabled ) {
 
-  let styles = '#tiles-container { padding: 8px 32px; }';
-  styles += '#tiles-container .export-import { position: relative; }';
-  styles += '#tiles-container .layer-info { width: 100%; }';
-
-  styles += '#tiles-container { flex-direction: column; }';
-  styles += '#tiles-container .col { margin-left: 0; }';
+  let styles = `
+    #tiles-container { 
+      padding: 8px 32px; 
+    }
+    #tiles-container .export-import { position: relative; }
+    #tiles-container .layer-info { width: 100%; }
+    #tiles-container { flex-direction: column; }
+    #tiles-container .col { margin-left: 0; }
+  `;
 
   addStyle(styles);
 
@@ -116,68 +137,92 @@ if (tilesForBigScreen) {
   document.getElementById("mode-room").appendChild(tilesContainer);
 
   // Responsiveness hack
-  document.getElementById("room-tiles").style.maxWidth = '100%';
   document.getElementById("layers").style.width = '100%';
-}
 
-if (prettyPrintExportProjectButton) {
-
-  function prettyExportJSON() {
-    var json = JSON.stringify(data, null, 2);
-    var a = document.createElement('a');
-    var blob = new Blob([json], {'type':'application/octet-stream'});
-    a.href = window.URL.createObjectURL(blob);
-    a.download = (data.name || 'Untitled Pulp Game')+'.json';
-    a.click();
+  if ( tilesForBigScreen.responsive ) {
+    document.getElementById("room-tiles").style.maxWidth = '100%';
   }
 
-  const exportButtons = document.getElementById('download').parentElement.parentElement;
+  if ( tilesForBigScreen.scrollbar ) {
+    let styles = `
+      #tiles-container { 
+        height: calc(100vh - 80px); 
+        overflow-y: scroll; 
+      }
+    `;
 
-  const button = document.createElement('button');
-  button.type = "button";
-  button.onclick = prettyExportJSON;
-  button.innerText = "Pretty Export";
-
-  const container = document.createElement('div');
-  container.className = "wrap"
-  container.append(button);
-
-  exportButtons.append(container);
+    addStyle(styles);
+  }
 }
 
-if (prettyPrintExportSoundButton) {
+if ( prettyPrintExportButtons.enabled ) {
 
-  function prettyExportAudioJSON() {
-    var json = JSON.stringify(data.sounds, null, 2);
-    var a = document.createElement('a');
-    var blob = new Blob([json], {'type':'application/octet-stream'});
-    a.href = window.URL.createObjectURL(blob);
-    a.download = 'pulp-sounds.json';
-    a.click();
+  if (prettyPrintExportButtons.project) {
+    function prettyExportJSON() {
+      var json = JSON.stringify(data, null, 2);
+      var a = document.createElement('a');
+      var blob = new Blob([json], {'type':'application/octet-stream'});
+      a.href = window.URL.createObjectURL(blob);
+      a.download = (data.name || 'Untitled Pulp Game')+'.json';
+      a.click();
+    }
+
+    const exportButtons = document.getElementById('download').parentElement.parentElement;
+
+    const button = document.createElement('button');
+    button.type = "button";
+    button.onclick = prettyExportJSON;
+    button.innerText = "Pretty Export";
+
+    const container = document.createElement('div');
+    container.className = "wrap"
+    container.append(button);
+
+    exportButtons.append(container);
   }
 
-  const exportButtons = document.getElementById('sounds-modifier');
+  if ( prettyPrintExportButtons.sound ) {
 
-  const button = document.createElement('button');
-  button.type = "button";
-  button.onclick = prettyExportAudioJSON;
-  button.innerText = "Pretty Export";
+    function prettyExportAudioJSON() {
+      var json = JSON.stringify(data.sounds, null, 2);
+      var a = document.createElement('a');
+      var blob = new Blob([json], {'type':'application/octet-stream'});
+      a.href = window.URL.createObjectURL(blob);
+      a.download = 'pulp-sounds.json';
+      a.click();
+    }
 
-  const container = document.createElement('div');
-  container.className = "wrap"
-  container.append(button);
+    const exportButtons = document.getElementById('sounds-modifier');
 
-  exportButtons.append(container);
+    const button = document.createElement('button');
+    button.type = "button";
+    button.onclick = prettyExportAudioJSON;
+    button.innerText = "Pretty Export";
+
+    const container = document.createElement('div');
+    container.className = "wrap"
+    container.append(button);
+
+    exportButtons.append(container);
+  }
 }
-if (removeFooter) {
+
+if ( removeFooter.enabled ) {
   const customFooter = document.getElementById('custom-footer');
   customFooter.remove();
 }
 
-if (openScriptButton) {
+if ( openScriptButton.enabled ) {
 
-  let styles = '#mode-script #go-to-script { display: none; }';
-  styles += '#mode-room #script-events { position: absolute; right: 9999px}';
+  const styles = `
+    #mode-script #go-to-script { 
+      display: none; 
+    }
+    #mode-room #script-events { 
+      position: absolute;
+      right: 9999px;
+    }
+  `;
 
   addStyle(styles);
 
