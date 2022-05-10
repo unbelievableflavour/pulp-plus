@@ -50,6 +50,9 @@ if (tilesForBigScreen) {
   styles += '#tiles-container .export-import { position: relative; }';
   styles += '#tiles-container .layer-info { width: 100%; }';
 
+  styles += '#tiles-container { flex-direction: column; }';
+  styles += '#tiles-container .col { margin-left: 0; }';
+
   addStyle(styles);
 
   const tilesContainer = document.getElementById("room-pane").getElementsByClassName('row')[0];
@@ -59,6 +62,7 @@ if (tilesForBigScreen) {
 
   // Responsiveness hack
   document.getElementById("room-tiles").style.maxWidth = '100%';
+  document.getElementById("layers").style.width = '100%';
 }
 
 if (prettyPrintExportButton) {
