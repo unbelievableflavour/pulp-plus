@@ -32,6 +32,7 @@ const defaultConfig = {
     enabled: true,
     scrollbar: true,
     responsive: false,
+    layersGrid: true
   },
 }
 
@@ -148,6 +149,17 @@ if ( tilesForBigScreen.enabled ) {
       #tiles-container { 
         height: calc(100vh - 80px); 
         overflow-y: scroll; 
+      }
+    `;
+
+    addStyle(styles);
+  }
+
+  if ( tilesForBigScreen.layersGrid ) {
+    let styles = `
+      #layers { 
+        display: grid;
+        grid-template-areas: "1fr 1fr 1fr"; 
       }
     `;
 
