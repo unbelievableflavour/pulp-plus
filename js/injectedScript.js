@@ -55,7 +55,7 @@ function relocateNode(node, target) {
   target.appendChild(node);
 }
 
-const savedConfig = JSON.parse(loadStuff() || {});
+const savedConfig = JSON.parse(loadStuff() || null);
 const updatedConfig = {...defaultConfig, ...savedConfig}
 const {
   biggerSearchResults,
