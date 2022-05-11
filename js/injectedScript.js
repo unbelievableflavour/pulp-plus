@@ -34,6 +34,9 @@ const defaultConfig = {
     responsive: false,
     layersGrid: true
   },
+  scriptSelectPlayerPriority: {
+    enabled: true
+  }
 }
 
 function addStyle(styles) {
@@ -65,6 +68,7 @@ const {
   openScriptButton,
   customTheme,
   removeFooter,
+  scriptSelectPlayerPriority,
 } = updatedConfig;
 
 if ( biggerSearchResults.enabled ) {
@@ -136,7 +140,7 @@ if ( tilesForBigScreen.enabled ) {
   tilesContainer.id = "tiles-container";
 
   document.getElementById("mode-room").appendChild(tilesContainer);
-  
+
   document.getElementById("layers").style.width = '100%';
   document.getElementById("layers").style.maxWidth = '640px';
 
@@ -217,6 +221,24 @@ if ( prettyPrintExportButtons.enabled ) {
 
     exportButtons.append(container);
   }
+}
+
+if ( scriptSelectPlayerPriority.enabled ) {
+
+  var scriptSelect = one('#script-select');
+
+  const label = document.createElement('li', {
+    className: "label",
+    innerText: "Player"
+  });
+
+  const player = document.createElement('li', {
+    innerText: "player"
+  });
+  player.setAttribute("data-value", "1");
+
+  scriptSelect.prepend(player)
+  scriptSelect.prepend(label)
 }
 
 if ( removeFooter.enabled ) {
