@@ -136,9 +136,9 @@ if ( tilesForBigScreen.enabled ) {
   tilesContainer.id = "tiles-container";
 
   document.getElementById("mode-room").appendChild(tilesContainer);
-
-  // Responsiveness hack
+  
   document.getElementById("layers").style.width = '100%';
+  document.getElementById("layers").style.maxWidth = '640px';
 
   if ( tilesForBigScreen.responsive ) {
     document.getElementById("room-tiles").style.maxWidth = '100%';
