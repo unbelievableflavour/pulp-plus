@@ -17,7 +17,7 @@ const defaultConfig = {
   responsiveScriptView: { enabled: true },
   openScriptButton: { enabled: true },
   customTheme: {
-    enabled: true,
+    enabled: false,
     theme: {
       colorPrimary: 'var(--ui-color-playdate-black)',
       colorSecondary: 'var(--ui-color-playdate-white)',

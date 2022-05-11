@@ -3,7 +3,7 @@
 
   "name": "Pulp+",
   "description": "This extension will extend Pulp with some extra features",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "content_scripts": [{
     "matches": ["https://play.date/pulp/*"],
     "js": ["/js/scriptInjector.js"]
