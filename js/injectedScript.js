@@ -316,6 +316,17 @@ if ( openScriptButton.enabled ) {
   });
 
   scriptModifiers.append(button);
+
+  function openScriptButtonCallback(mutations) {
+    // just a small hack to make the scrip editor resize.
+    window.dispatchEvent(new Event('resize'));
+  }
+
+  const scriptEditorAceContent = one('#script-editor .ace_content');
+  let observer = new MutationObserver(openScriptButtonCallback);
+  observer.observe(scriptEditorAceContent, {
+    attributes: true,
+  });
 }
 
 function addSettingsContainer() {
