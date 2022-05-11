@@ -42,8 +42,9 @@ const defaultConfig = {
 function addStyle(styles) {
 
   /* Create style element */
-  var css = document.createElement('style');
-  css.type = 'text/css';
+  var css = createElement('style', {
+    type: 'text/css'
+  });
 
   if (css.styleSheet)
     css.styleSheet.cssText = styles;
@@ -51,6 +52,16 @@ function addStyle(styles) {
     css.appendChild(document.createTextNode(styles));
 
   document.getElementsByTagName("head")[0].appendChild(css);
+}
+
+function createElement(type, props) {
+  var $e = document.createElement(type);
+
+  for (const prop in props) {
+    $e[prop] = props[prop];
+  }
+
+  return $e;
 }
 
 function relocateNode(node, target) {
@@ -185,15 +196,17 @@ if ( prettyPrintExportButtons.enabled ) {
 
     const exportButtons = document.getElementById('download').parentElement.parentElement;
 
-    const button = document.createElement('button');
-    button.type = "button";
-    button.onclick = prettyExportJSON;
-    button.innerText = "Pretty Export";
+    const button = createElement('button', {
+      type: "button",
+      onclick: prettyExportJSON,
+      innerText: "Pretty Export"
+    });
 
-    const container = document.createElement('div');
-    container.className = "wrap"
+    const container = createElement('div',{
+      className: "wrap"
+    });
+
     container.append(button);
-
     exportButtons.append(container);
   }
 
@@ -210,15 +223,17 @@ if ( prettyPrintExportButtons.enabled ) {
 
     const exportButtons = document.getElementById('sounds-modifier');
 
-    const button = document.createElement('button');
-    button.type = "button";
-    button.onclick = prettyExportAudioJSON;
-    button.innerText = "Pretty Export";
+    const button = createElement('button',{
+      type: "button",
+      onclick: prettyExportAudioJSON,
+      innerText: "Pretty Export"
+    });
 
-    const container = document.createElement('div');
-    container.className = "wrap"
+    const container = createElement('div',{
+      className: "wrap"
+    });
+
     container.append(button);
-
     exportButtons.append(container);
   }
 }
@@ -227,12 +242,12 @@ if ( scriptSelectPlayerPriority.enabled ) {
 
   var scriptSelect = one('#script-select');
 
-  const label = document.createElement('li', {
+  const label = createElement('li', {
     className: "label",
     innerText: "Player"
   });
 
-  const player = document.createElement('li', {
+  const player = createElement('li', {
     innerText: "player"
   });
   player.setAttribute("data-value", "1");
@@ -279,11 +294,12 @@ if ( openScriptButton.enabled ) {
 
   const scriptModifiers = document.getElementById('script-modifiers');
 
-  const button = document.createElement('button');
-  button.type = "button";
-  button.id = "go-to-script";
-  button.onclick = openScript;
-  button.innerText = "Open script";
+  const button = createElement('button',{
+    type: "button",
+    id: "go-to-script",
+    onclick: openScript,
+    innerText: "Open script"
+  });
 
   scriptModifiers.append(button);
 }
@@ -309,30 +325,35 @@ function addSettingsContainer() {
     }
   }
 
-  const settingsContainer = document.createElement('div');
-  settingsContainer.id = "settings-container";
-  settingsContainer.className = "hidden";
-  settingsContainer.style = "box-shadow: 0 0 0 1px var(--ui-color-primary), 0 0 0 3px var(--ui-color-key); padding: 1rem; background-color: #b1aea8; position: fixed; top: 50%; left: 50%; width: 500px; transform: translate(-50%, -50%); z-index: 9999;"
+  const settingsContainer = createElement('div',{
+    id: "settings-container",
+    className: "hidden",
+    style: "box-shadow: 0 0 0 1px var(--ui-color-primary), 0 0 0 3px var(--ui-color-key); padding: 1rem; background-color: #b1aea8; position: fixed; top: 50%; left: 50%; width: 500px; transform: translate(-50%, -50%); z-index: 9999;"
+  });
 
-  const settingstextArea = document.createElement('textarea');
-  settingstextArea.id = "config";
-  settingstextArea.style = "width: 100%; height: 400px; margin-bottom: 1rem;";
-  settingstextArea.value = "config bla";
+  const settingstextArea = createElement('textarea',{
+    id: "config",
+    style: "width: 100%; height: 400px; margin-bottom: 1rem;",
+    value: "config bla"
+  });
 
-  const saveSettingsButton = document.createElement('button');
-  saveSettingsButton.type = "button";
-  saveSettingsButton.onclick = saveSettings;
-  saveSettingsButton.innerText = "Save";
+  const saveSettingsButton = createElement('button',{
+    type: "button",
+    onclick: saveSettings,
+    innerText: "Save"
+  });
 
-  const resetSettingsButton = document.createElement('button');
-  resetSettingsButton.type = "button";
-  resetSettingsButton.onclick = resetSettings;
-  resetSettingsButton.innerText = "Reset";
+  const resetSettingsButton = createElement('button',{
+    type: "button",
+    onclick: resetSettings,
+    innerText: "Reset"
+  });
 
-  const closeSettingsButton = document.createElement('button');
-  closeSettingsButton.type = "button";
-  closeSettingsButton.onclick = toggleSettingsContainer;
-  closeSettingsButton.innerText = "Close";
+  const closeSettingsButton = createElement('button',{
+    type: "button",
+    onclick: toggleSettingsContainer,
+    innerText: "Close"
+  });
 
   settingsContainer.appendChild(settingstextArea)
   settingsContainer.appendChild(saveSettingsButton)
@@ -353,13 +374,16 @@ const styles = '#settings-container.hidden { display: none; }';
 addStyle(styles);
 addSettingsContainer();
 
-const saveSettingsButton = document.createElement('button');
-saveSettingsButton.type = "button";
-saveSettingsButton.onclick = toggleSettingsContainer;
-saveSettingsButton.innerText = "Pulp+ Settings";
+const saveSettingsButton = createElement('button', {
+  type: "button",
+  onclick: toggleSettingsContainer,
+  innerText: "Pulp+ Settings"
+});
 
-const settingsButtonContainer = document.createElement('div');
-settingsButtonContainer.className = "wrap"
+const settingsButtonContainer = createElement('div', {
+  className: "wrap"
+});
+
 settingsButtonContainer.append(saveSettingsButton);
 
 const editorPane = document.getElementById('editor-pane');
