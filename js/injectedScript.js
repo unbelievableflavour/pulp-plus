@@ -1,12 +1,3 @@
-
-function saveStuff(saveData) {
-  localStorage.pulpPlus = JSON.stringify(saveData);
-}
-
-function loadStuff() {
-  return localStorage.pulpPlus;
-}
-
 const defaultConfig = {
   biggerSearchResults: { enabled: true },
   prettyPrintExportButtons: {
@@ -42,17 +33,27 @@ const defaultConfig = {
   }
 }
 
+function saveConfig(saveData) {
+  localStorage.pulpPlus = JSON.stringify(saveData);
+}
+
+function loadConfig() {
+  // Retrieve your data from localStorage OR grab default config
+  const savedConfig = JSON.parse(localStorage.pulpPlus || null);
+  return {...defaultConfig, ...savedConfig}
+}
+
 function addStyle(styles) {
 
-  /* Create style element */
-  var css = createElement('style', {
+  const css = createElement('style', {
     type: 'text/css'
   });
 
-  if (css.styleSheet)
+  if (css.styleSheet) {
     css.styleSheet.cssText = styles;
-  else
+  } else {
     css.appendChild(document.createTextNode(styles));
+  }
 
   document.getElementsByTagName("head")[0].appendChild(css);
 }
@@ -80,8 +81,7 @@ function relocateNode(node, target) {
   target.appendChild(node);
 }
 
-const savedConfig = JSON.parse(loadStuff() || null);
-const updatedConfig = {...defaultConfig, ...savedConfig}
+const config = loadConfig();
 const {
   biggerSearchResults,
   tilesForBigScreen,
@@ -92,7 +92,7 @@ const {
   customTheme,
   removeFooter,
   scriptSelectPlayerPriority,
-} = updatedConfig;
+} = config;
 
 if ( screenshot.enabled ) {
   addScript("https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js");
@@ -380,7 +380,7 @@ function addSettingsContainer() {
     try {
       var configInput = document.getElementById('config').value;
       var jsonConfig = JSON.parse(configInput);
-      saveStuff(jsonConfig);
+      saveConfig(jsonConfig);
       alert("Settings have been saved! Don't forget to refresh the page.");
     } catch {
       alert("An error occured! check your json");
@@ -389,7 +389,7 @@ function addSettingsContainer() {
 
   function resetSettings() {
     try {
-      saveStuff(defaultConfig);
+      saveConfig(defaultConfig);
       alert("Settings have been reset! Don't forget to refresh the page.");
     } catch {
       alert("An error occured! check your json");
@@ -433,9 +433,7 @@ function addSettingsContainer() {
 
   document.getElementById('main').appendChild(settingsContainer);
 
-// Retrieve your data from locaStorage OR grab default config
-  const saveData = JSON.parse(loadStuff() || null) || defaultConfig;
-
+  const saveData = loadConfig();
   const configInput = document.getElementById('config')
   configInput.value = JSON.stringify(saveData, null, 2);
 }
