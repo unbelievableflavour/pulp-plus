@@ -2,12 +2,17 @@
 
 A Chrome extension that extends Pulp with some extra features!
 
+<p align="center">
+    <img
+    src="https://raw.githubusercontent.com/unbelievableflavour/pulp-plus/master/screenshot.png" />
+</p>
+
 ## How to install
 
 1. Download the newest release and unpack it.
 2. Open "Edge" or "Chrome" and go to the url "chrome://extensions/".
 3. Click "Load unpacked" and select the "pulp+ folder you unpacked.
-4. That's all! You know it's installed correctly when you have a "Pulp+ settings" button in the bottom left corner.
+4. That's all!
 
 ## Features
 - `biggerSearchResults`
