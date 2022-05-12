@@ -2,7 +2,7 @@
   "manifest_version": 3,
 
   "name": "Pulp+",
-  "description": "This extension will extend Pulp with some extra features",
+  "description": "This extension will extend Pulp with some extra features!",
   "version": "0.2.1",
   "content_scripts": [{
     "matches": ["https://play.date/pulp/*"],
