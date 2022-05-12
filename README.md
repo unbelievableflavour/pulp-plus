@@ -1,4 +1,4 @@
-# pulp+
+# Pulp+
 
 A Chrome extension that extends Pulp with some extra features!
 
