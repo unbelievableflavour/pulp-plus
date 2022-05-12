@@ -31,6 +31,8 @@ A Chrome extension that extends Pulp with some extra features!
       Contains all the editable theme colors.
 - `removeFooter`
   Removes the footer since it overlaps with the "pulp+ settings" button.
+- `responsiveScriptView`
+  Makes the script editor responsive.
 - `tilesForBigScreen`
   Moves tiles on the right side of the screen
     - `scrollbar`
@@ -43,3 +45,4 @@ A Chrome extension that extends Pulp with some extra features!
   Adds 'player' to the top of the "script-selector dropdown since it's used a lot.
 - `screenshot`
   Adds the ability to screenshot rooms.
+  
