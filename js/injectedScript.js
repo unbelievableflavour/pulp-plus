@@ -57,6 +57,14 @@ function addStyle(styles) {
   document.getElementsByTagName("head")[0].appendChild(css);
 }
 
+function addScript(url) {
+  const script = createElement('script', {
+    src: url
+  });
+
+  document.head.appendChild(script)
+}
+
 function createElement(type, props) {
   var $e = document.createElement(type);
 
@@ -87,11 +95,7 @@ const {
 } = updatedConfig;
 
 if ( screenshot.enabled ) {
-  const script = createElement('script', {
-    src: "https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"
-  });
-
-  document.head.appendChild(script)
+  addScript("https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js");
 
   function saveScreenshot(canvas) {
     const fileName = "pulp-screenshot";
