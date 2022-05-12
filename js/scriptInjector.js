@@ -61,14 +61,50 @@
   function loadModules() {
     const {
       biggerSearchResults,
-      screenshot
+      customTheme,
+      openScriptButton,
+      prettyPrintExportButtons,
+      removeFooter,
+      responsiveScriptView,
+      screenshot,
+      scriptSelectPlayerPriority,
+      tilesForBigScreen
     } = initAndUpdateConfig();
 
     if ( biggerSearchResults.enabled ) {
       addModule( 'biggerSearchResults');
     }
+
+    if ( customTheme.enabled ) {
+      addModule( 'screenshot');
+    }
+
+    if ( openScriptButton.enabled ) {
+      addModule( 'openScriptButton');
+    }
+
+    if ( prettyPrintExportButtons.enabled ) {
+      addModule( 'prettyPrintExportButtons');
+    }
+
+    if ( removeFooter.enabled ) {
+      addModule( 'removeFooter');
+    }
+
+    if ( responsiveScriptView.enabled ) {
+      addModule( 'responsiveScriptView');
+    }
+
     if ( screenshot.enabled ) {
       addModule( 'screenshot');
+    }
+
+    if ( scriptSelectPlayerPriority.enabled ) {
+      addModule( 'scriptSelectPlayerPriority');
+    }
+
+    if ( tilesForBigScreen.enabled ) {
+      addModule( 'tilesForBigScreen');
     }
   }
 
