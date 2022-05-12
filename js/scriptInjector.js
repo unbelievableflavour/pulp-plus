@@ -71,8 +71,6 @@
   }
 
   function loadModules() {
-    const config = initAndUpdateConfig();
-
     modules.forEach((module) => {
       if ( config[module] && config[module].enabled ) {
         addModule( module);
@@ -80,6 +78,7 @@
     });
   }
 
+  const config = initAndUpdateConfig();
   injectScript( chrome.runtime.getURL('/js/injectedScript.js'), 'body');
   document.querySelector('#injectedScript').addEventListener('load', loadModules);
 }
