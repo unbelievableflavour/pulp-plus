@@ -1,46 +1,15 @@
-const defaultConfig = {
-  biggerSearchResults: { enabled: true },
-  prettyPrintExportButtons: {
-    enabled: true,
-    project:true,
-    sound: true
-  },
-  responsiveScriptView: { enabled: true },
-  openScriptButton: { enabled: true },
-  customTheme: {
-    enabled: false,
-    theme: {
-      colorPrimary: 'var(--ui-color-playdate-black)',
-      colorSecondary: 'var(--ui-color-playdate-white)',
-      colorTertiary: 'var(--ui-color-secondary)',
-      colorKey: 'var(--ui-color-playdate-yellow)',
-      colorCall: 'var(--ui-color-secondary)',
-      colorVoid: 'black',
-    },
-  },
-  removeFooter: { enabled: true },
-  tilesForBigScreen: {
-    enabled: true,
-    scrollbar: true,
-    responsive: false,
-    layersGrid: true
-  },
-  scriptSelectPlayerPriority: {
-    enabled: true
-  },
-  screenshot: {
-    enabled: true
-  }
-}
-
 function saveConfig(saveData) {
-  localStorage.pulpPlus = JSON.stringify(saveData);
+  const savedConfig = JSON.parse(localStorage.pulpPlus || null);
+  localStorage.pulpPlus = JSON.stringify({...saveData, defaultConfig: savedConfig.defaultConfig});
 }
 
 function loadConfig() {
-  // Retrieve your data from localStorage OR grab default config
+  return JSON.parse(localStorage.pulpPlus);
+}
+
+function resetConfig() {
   const savedConfig = JSON.parse(localStorage.pulpPlus || null);
-  return {...defaultConfig, ...savedConfig}
+  localStorage.pulpPlus = JSON.stringify({...savedConfig.defaultConfig, defaultConfig: savedConfig.defaultConfig});
 }
 
 function addStyle(styles) {
@@ -389,7 +358,7 @@ function addSettingsContainer() {
 
   function resetSettings() {
     try {
-      saveConfig(defaultConfig);
+      resetConfig();
       alert("Settings have been reset! Don't forget to refresh the page.");
     } catch {
       alert("An error occured! check your json");
