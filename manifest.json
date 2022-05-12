@@ -9,7 +9,11 @@
     "js": ["/js/scriptInjector.js"]
   }],
   "web_accessible_resources" : [{
-    "resources": ["/js/injectedScript.js"],
+    "resources": [
+      "/js/injectedScript.js",
+      "/js/modules/biggerSearchResults.js",
+      "/js/modules/screenshot.js"
+    ],
     "matches": ["<all_urls>"]
   }],
   "permissions": [

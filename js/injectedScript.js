@@ -52,63 +52,14 @@ function relocateNode(node, target) {
 
 const config = loadConfig();
 const {
-  biggerSearchResults,
   tilesForBigScreen,
   responsiveScriptView,
   prettyPrintExportButtons,
   openScriptButton,
-  screenshot,
   customTheme,
   removeFooter,
   scriptSelectPlayerPriority,
 } = config;
-
-if ( screenshot.enabled ) {
-  addScript("https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js");
-
-  function saveScreenshot(canvas) {
-    const fileName = "pulp-screenshot";
-    const link = document.createElement("a");
-    link.download = fileName + ".png";
-    console.log(canvas);
-    canvas.toBlob(function (blob) {
-      console.log(blob);
-      link.href = URL.createObjectURL(blob);
-      link.click();
-    });
-  }
-
-  function screenshotRoom(){
-    let div = one('#room-pane .grid');
-    html2canvas(div).then(saveScreenshot)
-  }
-
-  const button = createElement('button', {
-    type: "button",
-    onclick: screenshotRoom,
-    innerText: "Screenshot room"
-  });
-
-  const buttonContainer = createElement('div', {
-    className: "wrap",
-  });
-
-  buttonContainer.appendChild(button);
-  one('#room-pane').appendChild(buttonContainer);
-}
-
-if ( biggerSearchResults.enabled ) {
-  const styles = `
-    #search-wrap #results-list { 
-      width: 600px;
-    }
-    #search-wrap #results-list li:not(.label), #select-options { 
-      max-width: 100%; 
-    }
-  `;
-
-  addStyle(styles);
-}
 
 if ( responsiveScriptView.enabled ) {
   const styles = `
