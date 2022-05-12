@@ -48,3 +48,6 @@ Important: This plugin is in no affiliated with Panic. Lot's of the features bel
 - `screenshot`
   Adds the ability to screenshot rooms.
   
+## FAQ
+### Does this work on Edge? ###
+Yes Chrome extensions work on Edge too!
