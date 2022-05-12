@@ -7,6 +7,8 @@ A Chrome extension that extends Pulp with some extra features!
     src="https://raw.githubusercontent.com/unbelievableflavour/pulp-plus/master/screenshot.png" />
 </p>
 
+Important: This plugin is in no affiliated with Panic. Lot's of the features below are just hacks and are easily broken by Pulp updates.
+
 ## How to install
 
 1. Download the newest release and unpack it.
