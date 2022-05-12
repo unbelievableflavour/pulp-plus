@@ -140,7 +140,8 @@ if ( tilesForBigScreen.enabled ) {
     let styles = `
       #layers { 
         display: grid;
-        grid-template-areas: "1fr 1fr 1fr"; 
+        grid-template-areas: "1fr 1fr 1fr";
+        grid-gap: 0.5rem; 
       }
     `;
 
