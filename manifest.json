@@ -5,7 +5,7 @@
   "description": "This extension will extend Pulp with some extra features!",
   "version": "0.2.2",
   "content_scripts": [{
-    "matches": ["https://play.date/pulp/*"],
+    "matches": ["https://play.date/pulp/**/edit/*"],
     "js": ["/js/scriptInjector.js"]
   }],
   "web_accessible_resources" : [{
