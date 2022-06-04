@@ -110,7 +110,9 @@ function addSettingsContainer() {
 
   const saveData = loadConfig();
   const configInput = document.getElementById('config')
-  configInput.value = JSON.stringify(saveData, null, 2);
+  const configValue = JSON.parse(JSON.stringify(saveData));
+  delete configValue.defaultConfig;
+  configInput.value = JSON.stringify(configValue, null, 2);
 }
 
 const styles = '#settings-container.hidden { display: none; }';
