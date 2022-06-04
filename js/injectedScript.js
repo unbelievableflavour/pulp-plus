@@ -12,6 +12,14 @@ function resetConfig() {
   localStorage.pulpPlus = JSON.stringify({...savedConfig.defaultConfig, defaultConfig: savedConfig.defaultConfig});
 }
 
+function addExternalScript(url) {
+  const script = createElement('script', {
+    src: url
+  });
+
+  document.head.appendChild(script)
+}
+
 function addStyle(styles) {
 
   const css = createElement('style', {
@@ -25,14 +33,6 @@ function addStyle(styles) {
   }
 
   document.getElementsByTagName("head")[0].appendChild(css);
-}
-
-function addScript(url) {
-  const script = createElement('script', {
-    src: url
-  });
-
-  document.head.appendChild(script)
 }
 
 function createElement(type, props) {
