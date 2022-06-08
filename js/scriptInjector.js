@@ -1,18 +1,27 @@
 {
   const modules = [
     "biggerSearchResults",
+    "betterTiles",
     "customTheme",
     "openScriptButton",
     "prettyPrintExportButtons",
     "removeFooter",
     "responsiveScriptView",
     "screenshot",
-    "scriptSelectPlayerPriority",
-    "tilesForBigScreen"
+    "scriptSelectPlayerPriority"
   ];
 
   const defaultConfig = {
     biggerSearchResults: { enabled: true },
+    betterTiles: {
+      enabled: true,
+      scrollbar: true,
+      responsive: false,
+      layersGrid: true,
+      desktopMode: true,
+      layersAboveTiles: true,
+      lockedTilesCount: false,
+    },
     prettyPrintExportButtons: {
       enabled: true,
       project:true,
@@ -32,12 +41,6 @@
       },
     },
     removeFooter: { enabled: true },
-    tilesForBigScreen: {
-      enabled: true,
-      scrollbar: true,
-      responsive: false,
-      layersGrid: true
-    },
     scriptSelectPlayerPriority: {
       enabled: true
     },
