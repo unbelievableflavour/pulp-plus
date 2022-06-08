@@ -56,7 +56,10 @@ function addSettingsContainer() {
       var configInput = document.getElementById('config').value;
       var jsonConfig = JSON.parse(configInput);
       saveConfig(jsonConfig);
-      alert("Settings have been saved! Don't forget to refresh the page.");
+      var hasConfirmed = confirm("Settings have been saved! Settings will apply after refresh. Press OK to refresh.");
+      if (hasConfirmed) {
+        window.location.reload(true)
+      }
     } catch {
       alert("An error occured! check your json");
     }
@@ -65,7 +68,10 @@ function addSettingsContainer() {
   function resetSettings() {
     try {
       resetConfig();
-      alert("Settings have been reset! Don't forget to refresh the page.");
+      var hasConfirmed = confirm("Settings have been reset! Settings will apply after refresh. Press OK to refresh.");
+      if (hasConfirmed) {
+        window.location.reload(true)
+      }
     } catch {
       alert("An error occured! check your json");
     }
