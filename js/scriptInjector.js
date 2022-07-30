@@ -1,6 +1,7 @@
 {
   const modules = [
     "biggerSearchResults",
+    "biggerInputFields",
     "betterTiles",
     "customTheme",
     "openScriptButton",
@@ -21,6 +22,13 @@
       desktopMode: true,
       layersAboveTiles: true,
       lockedTilesCount: false,
+    },
+    biggerInputFields: {
+      enabled: true,
+      tileName: true,
+      roomName: true,
+      songName: true,
+      soundName: true,
     },
     prettyPrintExportButtons: {
       enabled: true,
