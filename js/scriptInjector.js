@@ -9,7 +9,8 @@
     "removeFooter",
     "responsiveScriptView",
     "screenshot",
-    "scriptSelectPlayerPriority"
+    "scriptSelectPlayerPriority",
+    "scriptSidebarWidth"
   ];
 
   const defaultConfig = {
@@ -35,7 +36,6 @@
       project:true,
       sound: true
     },
-    responsiveScriptView: { enabled: true },
     openScriptButton: { enabled: true },
     customTheme: {
       enabled: false,
@@ -49,11 +49,16 @@
       },
     },
     removeFooter: { enabled: true },
+    responsiveScriptView: { enabled: true },
+    screenshot: {
+      enabled: true
+    },
     scriptSelectPlayerPriority: {
       enabled: true
     },
-    screenshot: {
-      enabled: true
+    scriptSidebarWidth: {
+      enabled: true,
+      maxWidth: '100%'
     }
   }
 
