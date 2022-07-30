@@ -11,15 +11,7 @@
   "web_accessible_resources" : [{
     "resources": [
       "/js/injectedScript.js",
-      "/js/modules/betterTiles.js",
-      "/js/modules/biggerSearchResults.js",
-      "/js/modules/customTheme.js",
-      "/js/modules/openScriptButton.js",
-      "/js/modules/prettyPrintExportButtons.js",
-      "/js/modules/removeFooter.js",
-      "/js/modules/responsiveScriptView.js",
-      "/js/modules/screenshot.js",
-      "/js/modules/scriptSelectPlayerPriority.js"
+      "/js/modules/*"
     ],
     "matches": ["<all_urls>"]
   }],
