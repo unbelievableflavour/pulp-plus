@@ -4,6 +4,7 @@
     "biggerInputFields",
     "betterTiles",
     "customTheme",
+    "exampleProjects",
     "openScriptButton",
     "prettyPrintExportButtons",
     "removeFooter",
@@ -48,6 +49,7 @@
         colorVoid: 'black',
       },
     },
+    exampleProjects: { enabled: true },
     removeFooter: { enabled: true },
     responsiveScriptView: { enabled: true },
     screenshot: {
