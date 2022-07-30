@@ -1,5 +1,9 @@
 {
   const projects = [
+      { name: 'Fade-in & Fade-out', url:'https://devforum.play.date/t/how-to-do-a-fade-in-or-fade-out-in-pulp/7892'},
+      { name: 'Rain effect', url: 'https://devforum.play.date/t/rain-effect-in-pulp/6919'},
+      { name: 'Multi-tile Animations', url: 'https://devforum.play.date/t/aseprite-script-export-multi-tile-animations-to-pulp/4080'},
+      { name: 'Two-tile-tall Player', url: 'https://devforum.play.date/t/pulp-how-to-two-tile-tall-player/1716/13'},
       { name: 'Path Generator', url: 'https://devforum.play.date/t/dynamic-path-generator/4432'},
       { name: 'Transitions', url: 'https://devforum.play.date/t/transitions-example-project/4593'},
       { name: 'Platformer', url: 'https://devforum.play.date/t/pulp-simple-platformer-example/4327'}
