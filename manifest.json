@@ -1,9 +1,9 @@
 {
-  "manifest_version": 4,
+  "manifest_version": 5,
 
   "name": "Pulp+",
   "description": "This extension will extend Pulp with some extra features!",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "content_scripts": [{
     "matches": ["https://play.date/pulp/**/edit/*"],
     "js": ["/js/scriptInjector.js"]
