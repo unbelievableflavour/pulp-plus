@@ -1,5 +1,8 @@
 {
+  const { customTheme } = loadConfig();
+
   one('#theme-stylesheet').href = ""
+  one('#theme-select').innerText = "Custom"
 
   addStyle(` 
     .theme {
@@ -18,7 +21,4 @@
     --ui-color-key-alpha-50: #d8b370; /* 50% key on #b1aea8 (specifically, not --ui-color-secondary), pre-baked */
     --ui-color-call-alpha-50: var(--ui-color-secondary-alpha-50);
   }`);
-
-  const themeSelect = document.getElementById('theme-select');
-  themeSelect.innerText = "Custom"
 }
