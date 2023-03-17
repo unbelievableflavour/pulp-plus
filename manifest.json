@@ -1,6 +1,5 @@
 {
-  "manifest_version": 5,
-
+  "manifest_version": 3,
   "name": "Pulp+",
   "description": "This extension will extend Pulp with some extra features!",
   "version": "0.4.2",
